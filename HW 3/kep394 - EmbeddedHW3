@@ -1,0 +1,48 @@
+Kiersten Page
+Embedded Homework 3
+
+1)  TCCR2A = Ox21;
+	TCCR2B = Ox09;
+
+2)
+	void fpnInput(float fpn){
+		if(fpn >= 1){
+			OCR2B = (unsigned char) OCR2A;
+		}
+  		else if(fpn <= 0){
+  			OCR2B = 0xFF;
+  		}
+  		else{
+  			OCR2B = (OCR2A * fpn); 
+  		}
+	}
+
+3)
+
+  void fpnInput(float fpn){
+    if(fpn >= 1){
+      OCR2B = (unsigned char) OCR2A;
+    }
+      else if(fpn <= 0){
+        OCR2B = 0xFF;
+      }
+      else{
+        OCR2B = (OCR2A * fpn); 
+      }
+  }
+
+  void setup(){
+    DDRD |= (1 << 3);
+    TCCR2A = 0x33;
+    TCCR2B = 0x0B;
+    OCR2A = 125;
+    OCR2B = 0;
+  }
+
+  void loop(){
+    if(TCNT2 >= 125){
+      TCNT2 = 0x00;
+    }
+    delayMicroseconds(4);
+    TCNT2 += 1; 
+  }
